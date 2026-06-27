@@ -7,11 +7,28 @@ type Column struct {
 	Description string `json:"description"`
 }
 
-// Table represents a database table and its associated columns
+// Index represents a database index
+type Index struct {
+	Name    string   `json:"name"`
+	Columns []string `json:"columns"`
+	Unique  bool     `json:"unique"`
+}
+
+// ForeignKey represents a relationship between tables
+type ForeignKey struct {
+	Name             string `json:"name"`
+	Column           string `json:"column"`
+	ReferencedTable  string `json:"referenced_table"`
+	ReferencedColumn string `json:"referenced_column"`
+}
+
+// Table represents a database table and its associated columns, indexes, and relationships
 type Table struct {
-	Name        string   `json:"name"`
-	Description string   `json:"description"`
-	Columns     []Column `json:"columns"`
+	Name        string       `json:"name"`
+	Description string       `json:"description"`
+	Columns     []Column     `json:"columns"`
+	Indexes     []Index      `json:"indexes"`
+	ForeignKeys []ForeignKey `json:"foreign_keys"`
 }
 
 // DatabaseSchema represents the full schema of a specific database
